@@ -7,11 +7,22 @@ import {
     navLinkItem,
     navLinkText
 } from './layout.module.css';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const Layout = ({pageTitle, children}) => {
+    const result = useStaticQuery(graphql`
+    query {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `)
+ 
     return (
         <div className={container}>
-            <title>{pageTitle}</title>
+            <title>{pageTitle} | {result.site.siteMetadata.title}</title>
             <nav>
                 <ul className={navLinks}>
                     <li className={navLinkItem}><Link to='/' className={navLinkText}>Home</Link></li>
