@@ -8,7 +8,6 @@ const BlogPost = ({data}) => {
   const image = getImage(data.mdx.frontmatter.hero_image);
     return(
         <Layout pageTitle={data.mdx.frontmatter.name}>
-            <p>This is where my blog posts content will go</p>
             <GatsbyImage  image={image} alt={data.mdx.frontmatter.hero_image_alt}/>
             <MDXRenderer>
                 {data.mdx.body}
