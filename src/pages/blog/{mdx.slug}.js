@@ -2,11 +2,14 @@ import * as React from 'react';
 import Layout from '../../components/layout';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const BlogPost = ({data}) => {
+  const image = getImage(data.mdx.frontmatter.hero_image);
     return(
         <Layout pageTitle={data.mdx.frontmatter.name}>
             <p>This is where my blog posts content will go</p>
+            <GatsbyImage  image={image} alt={data.mdx.frontmatter.hero_image_alt}/>
             <MDXRenderer>
                 {data.mdx.body}
             </MDXRenderer>
@@ -21,6 +24,12 @@ query ($id: String) {
         author
         datePublished(formatString: "MMM DD, YYYY")
         name
+        hero_image_alt
+        hero_image {
+        childImageSharp {
+          gatsbyImageData
+          }
+        }
       }
       body
     }
